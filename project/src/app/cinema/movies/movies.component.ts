@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieService } from 'src/app/services/movie.service';
-import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
+import { MovieService } from '../../services/movie.service';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MovieInterface, Genre } from './movieInterface';
 import { MatDialog } from '@angular/material/dialog';
