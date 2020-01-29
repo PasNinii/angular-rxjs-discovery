@@ -3,7 +3,7 @@ export interface MovieInterface {
   backdrop_path?: string;
   belongs_to_collection?: object;
   budget: number;
-  genres: Genre[];
+  genre_ids: number[];
   homepage?: string;
   id: number;
   imbd_id?: string;

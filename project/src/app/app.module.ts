@@ -10,6 +10,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MoviesComponent } from './cinema/movies/movies.component';
@@ -17,8 +19,8 @@ import { SeriesComponent } from './cinema/series/series.component';
 import { Routes, RouterModule } from '@angular/router';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/first', pathMatch: 'full' },
-  { path: 'movies', component: MoviesComponent},
+  { path: '', redirectTo: '/moviesnow', pathMatch: 'full' },
+  { path: 'moviesnow', component: MoviesComponent},
   { path: 'series', component: SeriesComponent},
 ];
 
@@ -35,6 +37,8 @@ export const routes: Routes = [
     BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,
+    MatFormFieldModule,
+    MatSelectModule,
     MatTabsModule,
     MatToolbarModule,
     RouterModule.forRoot(routes),

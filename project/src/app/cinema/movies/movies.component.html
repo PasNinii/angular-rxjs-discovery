@@ -1,2 +1,17 @@
-<img [src]="urlImages + (movies$ | async)?.poster_path" width="150" height="150" alt="names">
+<!-- <img [src]="urlImages + (movie$ | async)?.poster_path" width="150" height="150" alt="names"> -->
 
+<!-- <p *ngFor="let movie of movies$ | async"> {{ movie | json}} </p> -->
+
+<!-- {{ genres$ | async | json }} -->
+
+<mat-form-field>
+  <mat-label>Movie Genre</mat-label>
+  <mat-select [(value)]="selected" (selectionChange)="genreSwap( $event )" >
+    <mat-option *ngFor="let genre of genres$ | async; let i = index" [value]="genre.id">
+      {{ genre.name | titlecase }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+{{ moviesFiltered$ | async | json }}
