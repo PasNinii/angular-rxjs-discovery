@@ -1,13 +1,16 @@
+/* Basic Import */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+/* Local Import*/
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { environment } from '../environments/environment';
+/* Angular Material Import */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -17,9 +20,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp( environment.firebase ),
-    AngularFireDatabaseModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    MatTabsModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
