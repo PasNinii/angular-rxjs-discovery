@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { MovieInterface } from '../cinema/movies/movieInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,12 @@ export class MovieService {
 
   constructor( private http: HttpClient ) { }
 
-  getImages( language: string ): Observable<any> {
-    return this.http.get<any>( `${this.url}popular?api_key=${this.apiKey}&language=${language}` );
+  getImages( movieId: number, language: string ): Observable<any> {
+    return this.http.get<any>( `${this.url}${movieId}/images?api_key=${this.apiKey}&language=${language}` );
+  }
+
+  getMovies( movieId: number, language: string ): Observable<MovieInterface> {
+    return this.http.get<MovieInterface>( `https://api.themoviedb.org/3/movie/${movieId}?api_key=${this.apiKey}&language=${language}`);
   }
 
 }

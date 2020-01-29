@@ -16,14 +16,8 @@ export class AppComponent implements OnInit {
     { path: 'series', label: 'Series' },
   ];
 
+  constructor( ) { }
 
-  images$: Observable<any>;
-
-
-  constructor( private movieService: MovieService ) { }
-
-  ngOnInit( ) {
-    this.images$ = this.movieService.getImages( 'fr' );
-  }
+  ngOnInit( ) { }
 
 }
