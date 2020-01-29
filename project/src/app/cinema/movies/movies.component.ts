@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/services/movie.service';
 import { Observable, combineLatest, BehaviorSubject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { MovieInterface, Genre } from './movieInterface';
-import { flatten } from 'underscore';
-
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-movies',
@@ -22,7 +22,7 @@ export class MoviesComponent implements OnInit {
 
   genreSelected$ = new BehaviorSubject( null );
 
-  constructor( private movieService: MovieService ) { }
+  constructor( public dialog: MatDialog, private movieService: MovieService ) { }
 
   ngOnInit() {
 
@@ -33,8 +33,6 @@ export class MoviesComponent implements OnInit {
     this.moviesFiltered$ = combineLatest( this.movies$, this.genreSelected$ ).pipe(
       map(
         ( [moviesList, genreId] ) => {
-          console.log( moviesList );
-
           return moviesList.filter(
             ( movie ) => {
               return movie.genre_ids.includes( genreId );
@@ -47,6 +45,16 @@ export class MoviesComponent implements OnInit {
 
   genreSwap( event: any ): void {
     this.genreSelected$.next( event.value );
+  }
+
+  openDialog( movieDetail: MovieInterface ): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '450px',
+      data: movieDetail,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
 

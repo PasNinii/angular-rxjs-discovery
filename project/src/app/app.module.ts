@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 /* Angular Material Import */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -17,6 +18,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MoviesComponent } from './cinema/movies/movies.component';
 import { SeriesComponent } from './cinema/series/series.component';
 import { Routes, RouterModule } from '@angular/router';
+import { DialogComponent } from './cinema/movies/dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: '/moviesnow', pathMatch: 'full' },
@@ -29,21 +33,25 @@ export const routes: Routes = [
   declarations: [
     AppComponent,
     MoviesComponent,
-    SeriesComponent
+    SeriesComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     CommonModule,
+    FlexLayoutModule,
     HttpClientModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatSelectModule,
     MatTabsModule,
     MatToolbarModule,
     RouterModule.forRoot(routes),
   ],
+  entryComponents: [ MoviesComponent, DialogComponent ],
   providers: [ RouterModule ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

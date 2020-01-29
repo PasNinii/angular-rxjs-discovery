@@ -12,8 +12,18 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
+<div fxLayout="row" fxLayoutAlign="center">
+  <div fxLayout="row" *ngFor="let movie of moviesFiltered$ | async">
+    <img [src]="urlImages + movie?.poster_path" width="150" height="150" (click)="openDialog( movie )" >
+  </div>
+</div>
 
-<p *ngFor="let movie of moviesFiltered$ | async">
-  <img [src]="urlImages + movie?.poster_path" width="150" height="150" alt="names">
-</p>
 
+<div fxLayout="row">
+    <div fxFlex>First item in row</div>
+    <div fxFlex>Second item in row</div>
+</div>
+<div fxLayout="column">
+    <div fxFlex>First item in column</div>
+    <div fxFlex>Second item in column</div>
+</div>
