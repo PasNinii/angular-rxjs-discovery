@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieService } from 'src/app/services/movie.service';
+import { MovieService } from '../../services/movie.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MovieInterface } from './movieInterface';

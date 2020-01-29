@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SeriesService } from '../../services/series.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface mul_genre{
 	"id" : number;
@@ -18,8 +21,6 @@ export interface SeriesTV{
 };
 
 
-
-
 @Component({
   selector: 'app-series',
   templateUrl: './series.component.html',
@@ -27,9 +28,14 @@ export interface SeriesTV{
 })
 export class SeriesComponent implements OnInit {
 
-  constructor() { }
+  urlImages = 'https://image.tmdb.org/t/p/original/';
+
+  series$: Observable<SeriesTV>;
+
+  constructor( private SeriesService: SeriesService) { }
 
   ngOnInit() {
+    this.series$ = this.SeriesService.getSeries( 501, 'fr' );
   }
 
 }
