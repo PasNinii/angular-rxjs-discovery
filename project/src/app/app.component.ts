@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MovieService } from './services/movie.service';
+import { routes } from './app.module';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,12 @@ import { MovieService } from './services/movie.service';
 export class AppComponent implements OnInit {
 
   title = 'Yolo';
+
+  navLinks = [
+    { path: 'movies', label: 'Movies' },
+    { path: 'series', label: 'Series' },
+  ];
+
 
   images$: Observable<any>;
 
