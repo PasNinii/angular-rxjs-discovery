@@ -18,6 +18,8 @@ export class MoviesComponent implements OnInit {
 
   movies$: Observable<MovieInterface[]>;
   genres$: Observable<Genre[]>;
+
+  show = false;
   moviesFiltered$: Observable<MovieInterface[]>;
 
   genreSelected$ = new BehaviorSubject( null );
@@ -44,6 +46,7 @@ export class MoviesComponent implements OnInit {
   }
 
   genreSwap( event: any ): void {
+    this.show = true;
     this.genreSelected$.next( event.value );
   }
 
