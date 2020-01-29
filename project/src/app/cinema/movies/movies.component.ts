@@ -32,13 +32,12 @@ export class MoviesComponent implements OnInit {
 
     this.moviesFiltered$ = combineLatest( this.movies$, this.genreSelected$ ).pipe(
       map(
-        ( moviesList, genreId ) => {
+        ( [moviesList, genreId] ) => {
+          console.log( moviesList );
+
           return moviesList.filter(
-            ( movies ) => {
-              if ( movies ) {
-                console.log( genreId );
-                return movies.map( movie => movie.genre_ids.includes( genreId ) );
-              }
+            ( movie ) => {
+              return movie.genre_ids.includes( genreId );
             }
           );
         }

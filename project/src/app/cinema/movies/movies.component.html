@@ -13,5 +13,7 @@
   </mat-select>
 </mat-form-field>
 
+<p *ngFor="let movie of moviesFiltered$ | async">
+  <img [src]="urlImages + movie?.poster_path" width="150" height="150" alt="names">
+</p>
 
-{{ moviesFiltered$ | async | json }}
