@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PokemonServiceService } from './services/pokemon-service.service';
 import { Observable, BehaviorSubject, combineLatest, empty } from 'rxjs';
 import { ResultApi } from './interface/resultApi';
 import { map, flatMap, expand, concatMap, concat, scan } from 'rxjs/operators';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-root',
@@ -10,19 +13,19 @@ import { map, flatMap, expand, concatMap, concat, scan } from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   title = 'Poké';
   show = false;
 
   pokemons$: Observable<ResultApi[]>;
   pokemonDetail$: Observable<{}>;
 
-  pokemons: ResultApi[] = [];
-
   pokemonSelected$ = new BehaviorSubject( null );
 
   constructor( private service: PokemonServiceService ) { }
 
   ngOnInit( ): void {
+
     this.pokemons$ = this.service.getPokemon(  ).pipe(
       expand(
         // tslint:disable-next-line: deprecation
@@ -34,7 +37,6 @@ export class AppComponent implements OnInit {
         }
       ),
       scan((acc, data) => {
-        console.log( acc );
         return [...acc, ...data];
       }, [])
       );
@@ -53,51 +55,3 @@ export class AppComponent implements OnInit {
     this.pokemonSelected$.next( pokeName );
   }
 }
-
-
-/*
-
-import { Observable } from "rxjs/Observable";
-import { ajax } from "rxjs/observable/dom/ajax";
-import { AjaxResponse } from "rxjs/observable/dom/AjaxObservable";
-import { map } from "rxjs/operators";
-
-export function get(
-  url: string
-): Observable<{
-  content: object[];
-  next: string | null;
-}> {
-  return ajax.get(url).pipe(
-    map(response => ({
-      content: response.response,
-      next: next(response),
-    }))
-  );
-}
-
-function next(response: AjaxResponse): string | null {
-  let url: string | null = null;
-  const link = response.xhr.getResponseHeader("Link");
-  if (link) {
-    const match = link.match(/<([^>]+)>;\s*rel="next"/);
-    if (match) {
-      [, url] = match;
-    }
-  }
-  return url;
-}
-
-
-
-import { empty } from "rxjs/observable/empty";
-import { concatMap, expand } from "rxjs/operators";
-import { get } from "./get";
-
-const url = "https://api.github.com/users/sindresorhus/repos";
-const repos = get(url).pipe(
-  expand(({ next }) => (next ? get(next) : empty())),
-  concatMap(({ content }) => content)
-);
-repos.subscribe(repo => console.log(repo));
-*/
