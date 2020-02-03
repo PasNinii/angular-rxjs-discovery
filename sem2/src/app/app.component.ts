@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
           return result.results;
         }
       ),
-      concat(
+      concatMap(
         ( results ) => {
           results.map( res => this.pokemons.push( res ) );
           return results;
