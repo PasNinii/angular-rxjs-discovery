@@ -1,6 +1,8 @@
-<!-- <p *ngFor="let pokemon of ( pokemons$ | async )" (click)="getInfo( pokemon )"> {{ pokemon.name }} </p> -->
-{{ pokemons$ | async | json }}
 
-{{ pokemons }}
+
+<p *ngFor="let pokemon of ( pokemons$ | async )" (click)="getInfo( pokemon )"> {{ pokemon.name }} </p>
+
+
 
 <p *ngIf="show"> {{ pokemonDetail$ | async | json }} </p>
+

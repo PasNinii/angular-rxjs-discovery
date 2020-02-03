@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonServiceService } from './services/pokemon-service.service';
 import { Observable, BehaviorSubject, combineLatest, empty } from 'rxjs';
 import { ResultApi } from './interface/resultApi';
-import { map, flatMap, expand, concatMap, concat } from 'rxjs/operators';
+import { map, flatMap, expand, concatMap, concat, scan } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   title = 'Poké';
   show = false;
 
-  pokemons$: Observable<ResultApi>;
+  pokemons$: Observable<ResultApi[]>;
   pokemonDetail$: Observable<{}>;
 
   pokemons: ResultApi[] = [];
@@ -33,11 +33,10 @@ export class AppComponent implements OnInit {
           return result.results;
         }
       ),
-      concatMap(
-        ( results ) => {
-          results.map( res => this.pokemons.push( res ) );
-          return results;
-        })
+      scan((acc, data) => {
+        console.log( acc );
+        return [...acc, ...data];
+      }, [])
       );
 
     this.pokemonDetail$ = this.pokemonSelected$.pipe(

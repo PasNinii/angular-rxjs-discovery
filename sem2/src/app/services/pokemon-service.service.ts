@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { ResultApi, Info } from '../interface/resultApi';
+import { Info } from '../interface/resultApi';
 
 
 @Injectable({
