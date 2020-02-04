@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject, combineLatest, empty } from 'rxjs';
+import { map, expand, scan, take } from 'rxjs/operators';
 import { MovieInterface, Genre } from './movieInterface';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
@@ -16,8 +16,12 @@ export class MoviesComponent implements OnInit {
   selected = '';
   urlImages = 'https://image.tmdb.org/t/p/original/';
 
+  page = 1;
+
   movies$: Observable<MovieInterface[]>;
   genres$: Observable<Genre[]>;
+
+  totalPages: number;
 
   show = false;
   moviesFiltered$: Observable<MovieInterface[]>;
@@ -28,7 +32,24 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit() {
 
-    this.movies$ = this.movieService.getMovies( 'fr', 1 );
+    this.movies$ = this.movieService.getMovies( this.page ).pipe(
+      expand(
+        ({ }) => {
+          this.page += 1;
+          // tslint:disable-next-line: deprecation
+          return ( this.page ? this.movieService.getMovies( this.page ) : empty( ) );
+        }
+      ),
+      take( 10 ),
+      map(
+        result => {
+          return result.results;
+        }
+      ),
+      scan( ( acc, data ) => {
+        return [...acc, ...data];
+      }, [] )
+    );
 
     this.genres$ = this.movieService.getGenres( );
 

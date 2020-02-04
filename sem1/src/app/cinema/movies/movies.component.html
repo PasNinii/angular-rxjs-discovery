@@ -8,7 +8,7 @@
 </mat-form-field>
 
 <ng-template [ngIf]="show" [ngIfElse]="loading">
-  <div class="container" fxLayout="row" fxLayoutAlign="space-around center">
+  <div class="container">
     <div fxLayout="row" *ngFor="let movie of moviesFiltered$ | async">
       <img [src]="urlImages + movie?.poster_path" width="150" height="150" (click)="openDialog( movie )" >
     </div>
@@ -16,7 +16,7 @@
 </ng-template>
 
 <ng-template #loading>
-  <div class="container" fxLayout="row" fxLayoutAlign="space-around center">
+  <div class="container">
     <div fxLayout="row" *ngFor="let movie of movies$ | async">
       <img [src]="urlImages + movie?.poster_path" width="150" height="150" (click)="openDialog( movie )" >
     </div>
