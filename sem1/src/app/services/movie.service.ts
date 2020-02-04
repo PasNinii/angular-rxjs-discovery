@@ -47,7 +47,6 @@ export class MovieService {
   }
 
   getMovies( page: number ): Observable<MovieResponse> {
-    console.log( page );
     return this.http.get<MovieResponse>(`${this.urlMovieHttps}popular?api_key=${this.apiKey}&language=${this.language}&page=${page}`);
   }
 

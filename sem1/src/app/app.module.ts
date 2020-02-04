@@ -20,6 +20,7 @@ import { SeriesComponent } from './cinema/series/series.component';
 import { Routes, RouterModule } from '@angular/router';
 import { DialogComponent } from './cinema/movies/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 
 
 export const routes: Routes = [
@@ -48,6 +49,7 @@ export const routes: Routes = [
     MatSelectModule,
     MatTabsModule,
     MatToolbarModule,
+    MatInputModule,
     RouterModule.forRoot(routes),
   ],
   entryComponents: [ MoviesComponent, DialogComponent ],

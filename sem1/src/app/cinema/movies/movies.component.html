@@ -1,11 +1,17 @@
-<mat-form-field>
-  <mat-label>Movie Genre</mat-label>
-  <mat-select [(value)]="selected" (selectionChange)="genreSwap( $event )">
-    <mat-option *ngFor="let genre of genres$ | async" [value]="genre.id">
-      {{ genre.name | titlecase }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<div fxLayout="row space-around" fxLayoutAlign="space-around">
+  <mat-form-field>
+    <mat-label>Movie Genre</mat-label>
+    <mat-select [(value)]="selected" (selectionChange)="genreSwap( $event )">
+      <mat-option *ngFor="let genre of genres$ | async" [value]="genre.id">
+        {{ genre.name | titlecase }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Search Movie" value="Movie" (keyup)="searchMovie( $event )">
+  </mat-form-field>
+</div>
 
 <ng-template [ngIf]="show" [ngIfElse]="loading">
   <div class="container">
