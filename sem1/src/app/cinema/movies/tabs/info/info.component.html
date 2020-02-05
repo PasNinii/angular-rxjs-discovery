@@ -1,5 +1,27 @@
 <div flexLayout="columns">
-  <img [src]="urlImages + ( movie$ | async )?.poster_path" width="300" height="300">
-  <b>Keywords: </b> <span *ngFor="let keyword of ( movieKeywords$ | async )?.keywords"> {{ keyword.name }},</span>
-  <b>Similar Movies: </b> <span *ngFor="let similar of ( similarMovies$ | async )"> <img [src]="urlImages + similar?.poster_path" width="150" height="150"> </span>
+  <img [src]="urlImages + ( movie$ | async )?.poster_path" width="240" height="350">
+  <div>
+    <b>Keywords: </b> 
+    <span *ngFor="let keyword of ( movieKeywords$ | async )?.keywords">
+       {{ keyword.name }},
+    </span>
+    <b>Similar Movies: </b> 
+    <div class="info" fxlayout="row" fxLayoutGap="20px">
+      <div *ngFor="let similar of ( similarMovies$ | async )"> 
+        <img [src]="urlImages + similar?.poster_path" width="180" height="250"> 
+        <ng-template [ngIf]="(similar.title).length > 20" [ngIfElse]="title2">
+          <div class='title'>
+            {{(similar.title).substr(0,20)}} ...
+          </div>
+        </ng-template>
+        <ng-template #title2>
+          <div class='title'>
+            {{similar.title}}
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+  </div>
+  
 </div>
