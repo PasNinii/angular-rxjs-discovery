@@ -1,1 +1,5 @@
-<img [src]="urlImages + movie?.poster_path" width="150" height="150">
+<div flexLayout="columns">
+  <img [src]="urlImages + ( movie$ | async )?.poster_path" width="300" height="300">
+  <b>Keywords: </b> <span *ngFor="let keyword of ( movieKeywords$ | async )?.keywords"> {{ keyword.name }},</span>
+  <b>Similar Movies: </b> <span *ngFor="let similar of ( similarMovies$ | async )"> <img [src]="urlImages + similar?.poster_path" width="150" height="150"> </span>
+</div>

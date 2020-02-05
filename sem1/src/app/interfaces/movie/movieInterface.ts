@@ -8,6 +8,13 @@ export interface MoviesResponse {
   total_results: number;
 }
 
+export interface SimilarResponse {
+  page: number;
+  results: MovieInterface[];
+  total_pages: number;
+  total_results: number;
+}
+
 export interface MoviesInterface {
   adult: boolean;
   backdrop_path?: string;
@@ -95,12 +102,12 @@ export interface Crew {
   profile_path?: string;
 }
 
-export interface Keyword {
+export interface Keywords {
   id: number;
-  keywords: Keywords[];
+  keywords: Keyword[];
 }
 
-export interface Keywords {
+export interface Keyword {
   id: number;
   name: string;
 }
