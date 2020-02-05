@@ -9,11 +9,11 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Search Movie" value="Movie" (keyup)="searchMovie( $event )">
+    <input matInput placeholder="Movie 🙂" type="text" [(ngModel)]="searchString" (ngModelChange)="searchMovie( $event )" name="search">
   </mat-form-field>
 </div>
 
-<ng-template [ngIf]="show" [ngIfElse]="loading">
+<ng-template [ngIf]="moviesFiltered$" [ngIfElse]="loading">
   <div class="container">
     <div fxLayout="row" *ngFor="let movie of moviesFiltered$ | async">
       <img [src]="urlImages + movie?.poster_path" width="150" height="150" (click)="openDialog( movie )" >
@@ -22,9 +22,5 @@
 </ng-template>
 
 <ng-template #loading>
-  <div class="container">
-    <div fxLayout="row" *ngFor="let movie of movies$ | async">
-      <img [src]="urlImages + movie?.poster_path" width="150" height="150" (click)="openDialog( movie )" >
-    </div>
-  </div>
+  <h1> Noobs </h1>
 </ng-template>

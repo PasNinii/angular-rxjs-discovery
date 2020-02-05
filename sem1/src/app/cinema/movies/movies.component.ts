@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../services/movie.service';
 import { Observable, BehaviorSubject, combineLatest, empty } from 'rxjs';
-import { map, expand, scan, take } from 'rxjs/operators';
-import { MovieInterface, Genre } from './movieInterface';
+import { map, expand, scan, take, debounceTime } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
+import { MoviesInterface, Genre } from '../../interfaces/movie/movieInterface';
 
 @Component({
   selector: 'app-movies',
@@ -18,16 +18,17 @@ export class MoviesComponent implements OnInit {
 
   page = 1;
 
-  movies$: Observable<MovieInterface[]>;
+  movies$: Observable<MoviesInterface[]>;
   genres$: Observable<Genre[]>;
 
   totalPages = 10; // 499 max
 
-  show = false;
-  moviesFiltered$: Observable<MovieInterface[]>;
+  moviesFiltered$: Observable<MoviesInterface[]>;
 
   genreSelected$ = new BehaviorSubject( null );
-  search$ = new BehaviorSubject( '' );
+
+  search$ = new BehaviorSubject<string>( null );
+  searchString: string;
 
   constructor( public dialog: MatDialog, private movieService: MovieService ) { }
 
@@ -54,44 +55,36 @@ export class MoviesComponent implements OnInit {
 
     this.genres$ = this.movieService.getGenres( );
 
-    this.moviesFiltered$ = combineLatest( this.movies$, this.genreSelected$ ).pipe(
-      map(
-        ( [moviesList, genreId] ) => {
-          return moviesList.filter(
-            ( movie ) => {
-              return movie.genre_ids.includes( genreId );
-            }
-          );
+    this.moviesFiltered$ = combineLatest( this.movies$, this.genreSelected$, this.search$.pipe( debounceTime( 10 ) ) ).pipe(
+    map(
+      ( [moviesList, genreSelected, search] ) => {
+      return moviesList.filter( movie => {
+        if ( !genreSelected ) {
+          return true;
         }
-      ),
-    );
-
-    this.moviesFiltered$ = combineLatest( this.movies$, this.search$ ).pipe(
-      map(
-        ( [moviesList, search] ) => {
-          return moviesList.filter(
-            ( movie ) => {
-              return movie.title.includes( search );
-            }
-          );
+        return movie.genre_ids.includes( genreSelected );
+      } ).filter( movie => {
+        if ( !search ) {
+          return true;
         }
-      )
-    );
+        return movie.title.includes( search );
+        }
+      );
+    } ) );
   }
 
   genreSwap( event: any ): void {
-    this.show = true;
     this.genreSelected$.next( event.value );
   }
 
   searchMovie( event: any ): void {
-    this.search$.next( event.target.value );
+    this.search$.next( event );
   }
 
-  openDialog( movieDetail: MovieInterface ): void {
+  openDialog( movieDetail: MoviesInterface ): void {
     this.dialog.open(DialogComponent, {
       width: '450px',
-      data: movieDetail,
+      data: movieDetail.id,
     });
   }
 }

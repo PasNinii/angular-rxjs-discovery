@@ -1,25 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { MovieInterface, Genre } from '../cinema/movies/movieInterface';
 import { map } from 'rxjs/operators';
-
-interface MovieResponse {
-  page: number;
-  results: MovieInterface[];
-  dates: Date;
-  total_pages: number;
-  total_results: number;
-}
-
-interface Date {
-  maximum: string;
-  minimum: string;
-}
-
-interface GenreResponse {
-  genres: Genre[];
-}
+import { MovieInterface, MoviesResponse, Genre, GenreResponse } from '../interfaces/movie/movieInterface';
 
 
 @Injectable({
@@ -28,14 +11,6 @@ interface GenreResponse {
 export class MovieService {
 
   private urlMovieHttps = 'https://api.themoviedb.org/3/movie/';
-
-  // popular?api_key=a7846fa6179662a8e7e5da4093c5dbd5&language=en-US&page=500
-
-  // https://api.themoviedb.org/3/movie/popular?api_key=a7846fa6179662a8e7e5da4093c5dbd5&language=en-US&page=2
-
-  // https://api.themoviedb.org/3/movie/popular?api_key=a7846fa6179662a8e7e5da4093c5dbd5&language=en-US&page=2
-
-  // https://api.themoviedb.org/3/movie/popular?api_key=a7846fa6179662a8e7e5da4093c5dbd5&language=en-US$page=140
 
   private apiKey = 'a7846fa6179662a8e7e5da4093c5dbd5';
   private language = 'en-US';
@@ -46,8 +21,8 @@ export class MovieService {
     return this.http.get<MovieInterface>( `${this.urlMovieHttps}${movieId}?api_key=${this.apiKey}&language=${language}`);
   }
 
-  getMovies( page: number ): Observable<MovieResponse> {
-    return this.http.get<MovieResponse>(`${this.urlMovieHttps}popular?api_key=${this.apiKey}&language=${this.language}&page=${page}`);
+  getMovies( page: number ): Observable<MoviesResponse> {
+    return this.http.get<MoviesResponse>(`${this.urlMovieHttps}popular?api_key=${this.apiKey}&language=${this.language}&page=${page}`);
   }
 
   getGenres( ): Observable<Genre[]> {

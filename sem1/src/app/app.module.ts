@@ -21,6 +21,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DialogComponent } from './cinema/movies/dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 
 export const routes: Routes = [
@@ -50,6 +51,7 @@ export const routes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatInputModule,
+    FormsModule,
     RouterModule.forRoot(routes),
   ],
   entryComponents: [ MoviesComponent, DialogComponent ],
