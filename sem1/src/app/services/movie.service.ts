@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import {Crew, Credits, Cast } from '../interfaces/movie/movieInterface';
 import { MovieInterface, MoviesResponse, Genre, GenreResponse, Video, Videos, Keywords, SimilarResponse } from '../interfaces/movie/movieInterface';
-HttpClient
 
 @Injectable({
   providedIn: 'root'
@@ -40,14 +39,14 @@ export class MovieService {
         ( response ) => response.results
     ) );
   }
-  getCrew( crewId: number ): Observable<Crew[]> {
-    return this.http.get<Credits>( `${this.urlMovieHttps}${crewId}/credits?api_key=${this.apiKey}`).pipe(
+  getCrew( movieId: number ): Observable<Crew[]> {
+    return this.http.get<Credits>( `${this.urlMovieHttps}${movieId}/credits?api_key=${this.apiKey}`).pipe(
       map(
         (response) => response.crew
       ));
   }
-  getCast( crewId: number ): Observable<Cast[]> {
-    return this.http.get<Credits>( `${this.urlMovieHttps}${crewId}/credits?api_key=${this.apiKey}`).pipe(
+  getCast( movieId: number ): Observable<Cast[]> {
+    return this.http.get<Credits>( `${this.urlMovieHttps}${movieId}/credits?api_key=${this.apiKey}`).pipe(
       map(
         (response) => response.cast
       ));
@@ -63,10 +62,6 @@ export class MovieService {
         ( response ) => response.results
       )
     );
-  }
-
-  getRecommendedMovies( movieId: number ) {
-
   }
 
 }
