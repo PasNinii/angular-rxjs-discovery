@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { MovieInterface, MoviesResponse, Genre, GenreResponse } from '../interfaces/movie/movieInterface';
+import { MovieInterface, MoviesResponse, Genre, GenreResponse, Video, Videos } from '../interfaces/movie/movieInterface';
 
 
 @Injectable({
@@ -17,8 +17,8 @@ export class MovieService {
 
   constructor( private http: HttpClient ) { }
 
-  getMovie( movieId: number, language: string = 'fr' ): Observable<MovieInterface> {
-    return this.http.get<MovieInterface>( `${this.urlMovieHttps}${movieId}?api_key=${this.apiKey}&language=${language}`);
+  getMovie( movieId: number ): Observable<MovieInterface> {
+    return this.http.get<MovieInterface>( `${this.urlMovieHttps}${movieId}?api_key=${this.apiKey}&language=${this.language}`);
   }
 
   getMovies( page: number ): Observable<MoviesResponse> {
@@ -28,9 +28,16 @@ export class MovieService {
   getGenres( ): Observable<Genre[]> {
     return this.http.get<GenreResponse>(`https://api.themoviedb.org/3/genre/movie/list?api_key=${this.apiKey}&language=en-US`).pipe(
       map(
-        ( value ) => value.genres
+        ( response ) => response.genres
       )
     );
+  }
+
+  getVideos( movieId: number ): Observable<Video[]> {
+    return this.http.get<Videos>( `${this.urlMovieHttps}${movieId}/videos?api_key=${this.apiKey}&language=${this.language}` ).pipe(
+      map(
+        ( response ) => response.results
+    ) );
   }
 
 }
