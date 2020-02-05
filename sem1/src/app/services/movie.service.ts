@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { MovieInterface, MoviesResponse, Genre, GenreResponse, Video, Videos } from '../interfaces/movie/movieInterface';
-
+import { MovieInterface, MoviesResponse, Genre, GenreResponse, Video, Videos, Crew, Credits, Cast } from '../interfaces/movie/movieInterface';
+HttpClient
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +39,16 @@ export class MovieService {
         ( response ) => response.results
     ) );
   }
-
+  getCrew( crewId: number ): Observable<Crew[]> {
+    return this.http.get<Credits>( `${this.urlMovieHttps}${crewId}/credits?api_key=${this.apiKey}`).pipe(
+      map(
+        (response) => response.crew
+      ));
+  }
+  getCast( crewId: number ): Observable<Cast[]> {
+    return this.http.get<Credits>( `${this.urlMovieHttps}${crewId}/credits?api_key=${this.apiKey}`).pipe(
+      map(
+        (response) => response.cast
+      ));
+  }
 }

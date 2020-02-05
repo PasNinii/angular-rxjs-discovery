@@ -1,3 +1,35 @@
-<p>
+<!--<p>
   {{ id }}
-</p>
+  {{crew$ | async | json}}
+{{cast$ | async | json}}
+<div *ngFor="let crew of crew$ | async">
+  {{name}}
+  </div>
+
+<li *ngFor="let cast of cast$ | async">
+  {{name}}
+</li>
+
+
+<div *ngFor="let crew of crew$ | async">
+  {{name}}
+  </div>
+
+<div *ngFor="let cast of cast$ | async">
+  {{name}}
+  </div>
+
+
+{{cast$ | async | json}}
+
+</p>-->
+<div *ngFor="let cast of cast$ | async">
+{{cast.name}}
+</div>
+
+
+<div *ngFor="let crew of crew$ | async">
+  {{crew.name}}
+  </div>
+  
+  
