@@ -13,9 +13,9 @@ import { flatten, uniq } from 'underscore';
 };
 
 export interface SeriesTV{
-"id" : number; 
-"languages" : string[]; 
-"name" : string; 
+"id" : number;
+"languages" : string[];
+"name" : string;
 "number_of_episodes" : number;
 "genres" : mul_genre[];
 "number_of_seasons" : number;
@@ -31,7 +31,7 @@ export interface data_chart_lang{
 }
 
 
-export interface result{ 
+export interface result{
 	poster_path : string | null
 	popularity : number
 	id : number
@@ -76,7 +76,7 @@ export class SeriesComponent implements OnInit {
       map(response => {
         return response.results;
       })
-    ); 
+    );
     /*this.series_chartData$ = this.series$.pipe(
       map(series => {
         return series.map(

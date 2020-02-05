@@ -1,16 +1,8 @@
 <mat-toolbar color="warn">
-<span> {{ title }} </span>
+  <span><a routerLink="moviesnow"> {{ title }} </a></span>
 </mat-toolbar>
 
-<nav mat-tab-nav-bar>
-  <a mat-tab-link
-     *ngFor="let link of navLinks"
-     [routerLink]="link.path"
-     routerLinkActive #rla="routerLinkActive"
-     [active]="rla.isActive">
-    {{link.label}}
-  </a>
-</nav>
 
+<app-navigation [navLinks]="navLinks"></app-navigation>
 
 <router-outlet></router-outlet>

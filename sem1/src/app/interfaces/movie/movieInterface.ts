@@ -37,6 +37,7 @@ export interface MovieInterface {
   original_language: string;
   overview: string;
   popularity: number;
+  poster_path?: string;
   production_companies: ProductionCompanies[];
   production_countries: ProductionCountries[];
   release_date: string;
@@ -93,6 +94,33 @@ export interface Crew {
   name: string;
   profile_path?: string;
 }
+
+export interface Keyword {
+  id: number;
+  keywords: Keywords[];
+}
+
+export interface Keywords {
+  id: number;
+  name: string;
+}
+
+export interface Videos {
+  id: number;
+  results: Video[];
+}
+
+export interface Video {
+  id: string;
+  iso_639_1: string;
+  iso_3166_1: string;
+  key: string;
+  name: string;
+  site: string;
+  size: number;
+  type: string;
+}
+
 
 /* Genre */
 export interface GenreResponse {

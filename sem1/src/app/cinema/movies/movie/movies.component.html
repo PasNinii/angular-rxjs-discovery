@@ -16,7 +16,9 @@
 <ng-template [ngIf]="moviesFiltered$" [ngIfElse]="loading">
   <div class="container">
     <div fxLayout="row" *ngFor="let movie of moviesFiltered$ | async">
-      <img [src]="urlImages + movie?.poster_path" width="150" height="150" (click)="openDialog( movie )" >
+      <a routerLink="moviedetail" [state]="movie">
+        <img [src]="urlImages + movie?.poster_path" width="150" height="150">
+      </a>
     </div>
   </div>
 </ng-template>

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieService } from '../../services/movie.service';
+import { MovieService } from '../../../services/movie.service';
 import { Observable, BehaviorSubject, combineLatest, empty } from 'rxjs';
 import { map, expand, scan, take, debounceTime } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from './dialog/dialog.component';
-import { MoviesInterface, Genre } from '../../interfaces/movie/movieInterface';
+import { DialogComponent } from '../dialog/dialog.component';
+import { MoviesInterface, Genre, MovieInterface } from '../../../interfaces/movie/movieInterface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movies',
@@ -30,7 +31,7 @@ export class MoviesComponent implements OnInit {
   search$ = new BehaviorSubject<string>( null );
   searchString: string;
 
-  constructor( public dialog: MatDialog, private movieService: MovieService ) { }
+  constructor( private router: Router, public dialog: MatDialog, private movieService: MovieService ) { }
 
   ngOnInit() {
 
