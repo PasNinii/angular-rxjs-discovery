@@ -1,1 +1,4 @@
-<img [src]="urlImages + (series$ | async)?.poster_path" width="150" height="150" alt="names">
+<!-- {{series$ | async | json}}-->
+<div *ngFor="let serie of series$ | async">
+{{serie.name}}
+</div>
