@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MoviesInterface, Genre, MovieInterface } from '../../../interfaces/movie/movieInterface';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-movies',
@@ -68,7 +69,7 @@ export class MoviesComponent implements OnInit {
         if ( !search ) {
           return true;
         }
-        return movie.title.includes( search );
+        return movie.title.includes( search )
         }
       );
     } ) );

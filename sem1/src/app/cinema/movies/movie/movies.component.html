@@ -14,10 +14,20 @@
 </div>
 
 <ng-template [ngIf]="moviesFiltered$" [ngIfElse]="loading">
-  <div class="container">
-    <div fxLayout="row" *ngFor="let movie of moviesFiltered$ | async">
+  <div class="container" fxLayout="row wrapt" fxLayoutGap="20px">
+    <div *ngFor="let movie of moviesFiltered$ | async">
       <a routerLink="moviedetail" [state]="movie">
-        <img [src]="urlImages + movie?.poster_path" width="150" height="150">
+        <img [src]="urlImages + movie?.poster_path" width="240" height="350">
+        <ng-template [ngIf]="(movie.title).length > 20" [ngIfElse]="title2">
+          <div class='title'>
+          {{(movie.title).substr(0,30)}} ...
+          </div>
+        </ng-template>
+        <ng-template #title2>
+          <div class='title'>
+            {{movie.title}}
+            </div>
+        </ng-template>
       </a>
     </div>
   </div>

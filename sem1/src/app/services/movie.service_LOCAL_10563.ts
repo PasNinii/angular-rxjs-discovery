@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import {Crew, Credits, Cast } from '../interfaces/movie/movieInterface';
-import { MovieInterface, MoviesResponse, Genre, GenreResponse, Video, Videos, Keywords, SimilarResponse } from '../interfaces/movie/movieInterface';
+import { MovieInterface, MoviesResponse, Genre, GenreResponse, Video, Videos, Crew, Credits, Cast } from '../interfaces/movie/movieInterface';
 HttpClient
 
 @Injectable({
@@ -52,21 +51,4 @@ export class MovieService {
         (response) => response.cast
       ));
   }
-
-  getKeywords( movieId: number ): Observable<Keywords> {
-    return this.http.get<Keywords>( `${this.urlMovieHttps}${movieId}/keywords?api_key=${this.apiKey}&language=${this.language}` );
-  }
-
-  getSimilarMovies( movieId: number ): Observable<MovieInterface[]> {
-    return this.http.get<SimilarResponse>( `${this.urlMovieHttps}${movieId}/similar?api_key=${this.apiKey}&language=${this.language}` ).pipe(
-      map(
-        ( response ) => response.results
-      )
-    );
-  }
-
-  getRecommendedMovies( movieId: number ) {
-
-  }
-
 }
