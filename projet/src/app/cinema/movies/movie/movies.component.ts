@@ -12,8 +12,6 @@ import { MoviesInterface, Genre, MovieInterface } from '../../../interfaces/movi
 export class MoviesComponent implements OnInit {
 
   selected = '';
-  urlImages = 'https://image.tmdb.org/t/p/original/';
-
   page = 1;
 
   movies$: Observable<MoviesInterface[]>;

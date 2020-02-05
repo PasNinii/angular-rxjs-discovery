@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { MovieService } from 'app/services/movie.service';
 import { Observable } from 'rxjs';
 import { MovieInterface, Video } from 'app/interfaces/movie/movieInterface';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-movie-detail',
@@ -16,18 +17,24 @@ export class MovieDetailComponent implements OnInit {
   videos$: Observable<Video[]>;
 
   movieId: MovieInterface;
+  id$: any;
 
-  constructor( private router: Router, private service: MovieService ) {
-    console.log( this.router.getCurrentNavigation( ).extras.state );
-  }
+  constructor( private route: ActivatedRoute,
+               private router: Router,
+               private service: MovieService
+             ) { }
 
   ngOnInit() {
 
-    this.movieId = history.state;
+    this.movie$ = this.route.paramMap.pipe(
+      switchMap( ( params: ParamMap ) =>
+        this.service.getMovie( params.get( 'id' ) ) )
+    );
 
-    this.movie$ = this.service.getMovie( this.movieId.id );
-
-    this.videos$ = this.service.getVideos( this.movieId.id );
+    this.videos$ = this.route.paramMap.pipe(
+      switchMap( ( params: ParamMap ) =>
+        this.service.getVideos( params.get( 'id' ) ) )
+    );
   }
 
 

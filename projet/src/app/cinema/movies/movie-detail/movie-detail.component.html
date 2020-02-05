@@ -1,6 +1,5 @@
 <h1>{{ ( movie$ | async )?.title }}</h1>
 
-
 <mat-tab-group>
   <mat-tab label="Info"><app-info [movie$]="movie$"></app-info></mat-tab>
   <mat-tab label="Casting"><app-casting [movie$]="movie$"></app-casting> </mat-tab>

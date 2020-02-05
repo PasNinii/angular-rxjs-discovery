@@ -27,12 +27,13 @@ import { SafePipe } from './pipe/safePipe';
 import { CastingComponent } from './cinema/movies/tabs/casting/casting.component';
 import { BandeaComponent } from './cinema/movies/tabs/bandea/bandea.component';
 import { InfoComponent } from './cinema/movies/tabs/info/info.component';
+import { MovieCardComponent } from './cinema/movies/movie-card/movie-card.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/moviesnow', pathMatch: 'full' },
   { path: 'moviesnow', component: MoviesComponent},
   { path: 'series', component: SeriesComponent},
-  { path: 'moviesnow/moviedetail', component: MovieDetailComponent },
+  { path: 'moviedetail/:id', component: MovieDetailComponent },
 ];
 
 
@@ -47,6 +48,7 @@ export const routes: Routes = [
     CastingComponent,
     BandeaComponent,
     InfoComponent,
+    MovieCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,9 +64,8 @@ export const routes: Routes = [
     MatToolbarModule,
     MatInputModule,
     FormsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot( routes ),
   ],
-  entryComponents: [ MoviesComponent ],
   providers: [ RouterModule ],
   bootstrap: [ AppComponent ]
 })

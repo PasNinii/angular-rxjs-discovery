@@ -17,11 +17,11 @@ export class MovieService {
 
   constructor( private http: HttpClient ) { }
 
-  getMovie( movieId: number ): Observable<MovieInterface> {
+  getMovie( movieId: any ): Observable<MovieInterface> {
     return this.http.get<MovieInterface>( `${this.urlMovieHttps}${movieId}?api_key=${this.apiKey}&language=${this.language}`);
   }
 
-  getMovies( page: number ): Observable<MoviesResponse> {
+  getMovies( page: any ): Observable<MoviesResponse> {
     return this.http.get<MoviesResponse>(`${this.urlMovieHttps}popular?api_key=${this.apiKey}&language=${this.language}&page=${page}`);
   }
 
@@ -33,19 +33,19 @@ export class MovieService {
     );
   }
 
-  getVideos( movieId: number ): Observable<Video[]> {
+  getVideos( movieId: any ): Observable<Video[]> {
     return this.http.get<Videos>( `${this.urlMovieHttps}${movieId}/videos?api_key=${this.apiKey}&language=${this.language}` ).pipe(
       map(
         ( response ) => response.results
     ) );
   }
-  getCrew( movieId: number ): Observable<Crew[]> {
+  getCrew( movieId: any ): Observable<Crew[]> {
     return this.http.get<Credits>( `${this.urlMovieHttps}${movieId}/credits?api_key=${this.apiKey}`).pipe(
       map(
         (response) => response.crew
       ));
   }
-  getCast( movieId: number ): Observable<Cast[]> {
+  getCast( movieId: any ): Observable<Cast[]> {
     return this.http.get<Credits>( `${this.urlMovieHttps}${movieId}/credits?api_key=${this.apiKey}`).pipe(
       map(
         (response) => response.cast
