@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MovieInterface, Keywords } from 'app/interfaces/movie/movieInterface';
 import { Observable, of } from 'rxjs';
 import { MovieService } from 'app/services/movie.service';
-import { map, flatMap } from 'rxjs/operators';
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-info',
