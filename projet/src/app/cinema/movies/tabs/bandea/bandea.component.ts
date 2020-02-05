@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Video } from 'app/interfaces/movie/movieInterface';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-bandea',
@@ -8,7 +9,7 @@ import { Video } from 'app/interfaces/movie/movieInterface';
 })
 export class BandeaComponent implements OnInit {
 
-  @Input( ) videos: Video[];
+  @Input( ) videos: Observable<Video[]>;
 
   urlVideo = 'https://www.youtube.com/embed/';
 

@@ -1,4 +1,4 @@
-<div *ngFor="let video of videos">
+<div *ngFor="let video of videos | async">
   <ng-container *ngIf="video?.key">
     <iframe width="560" height="315" [src]="urlVideo + video?.key | safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </ng-container>

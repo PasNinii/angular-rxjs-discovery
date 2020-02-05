@@ -1,14 +1,11 @@
-<div flexLayout="columns">
+<div class="container" fxLayout="row wrap" fxLayoutGap="20px">
   <img [src]="urlImages + ( movie$ | async )?.poster_path" width="240" height="350">
-  <div>
-    <b>Keywords: </b>
-    <span *ngFor="let keyword of ( movieKeywords$ | async )?.keywords">
-       {{ keyword.name }},
-    </span>
-
-    <b>Similar Movies: </b>
-    <app-movie-card [moviesFiltered$]="similarMovies$"></app-movie-card>
-  </div>
-
+  <b>Keywords: </b>
+  <span *ngFor="let keyword of ( movieKeywords$ | async )?.keywords">
+    {{ keyword.name | uppercase }}
+  </span>
 </div>
-
+<div>
+  <h2>Similar Movies: </h2>
+  <app-movie-card [moviesFiltered$]="similarMovies$"></app-movie-card>
+</div>
