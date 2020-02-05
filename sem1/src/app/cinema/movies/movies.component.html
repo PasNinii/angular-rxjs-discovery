@@ -14,9 +14,10 @@
 </div>
 
 <ng-template [ngIf]="moviesFiltered$" [ngIfElse]="loading">
-  <div class="container">
-    <div fxLayout="row" *ngFor="let movie of moviesFiltered$ | async">
+  <div class="container" fxLayout="row">
+    <div fxLayoutGap="5px" *ngFor="let movie of moviesFiltered$ | async">
       <img [src]="urlImages + movie?.poster_path" width="150" height="150" (click)="openDialog( movie )" >
+      <div class="title" fxLayout="wrapt">{{movie.title}}</div>
     </div>
   </div>
 </ng-template>
