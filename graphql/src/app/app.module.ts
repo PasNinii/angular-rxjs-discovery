@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     GraphQLModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
