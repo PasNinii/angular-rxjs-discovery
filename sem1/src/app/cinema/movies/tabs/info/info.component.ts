@@ -13,6 +13,9 @@ export class InfoComponent implements OnInit {
 
   @Input( ) movie$: Observable<MovieInterface>;
 
+  pokemonSelected: string;
+  pokemons = ['1', '2', '3'];
+
   movieKeywords$: Observable<Keywords>;
   similarMovies$: Observable<MovieInterface[]>;
 

@@ -1,3 +1,10 @@
-<p>
-  {{ id }}
-</p>
+<div *ngFor="let cast of cast$ | async">
+  {{ cast.name }}
+</div>
+
+
+<div *ngFor="let crew of crew$ | async">
+  {{ crew.name }}
+</div>
+
+
