@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, combineLatest} from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
-
+import { flatten, uniq } from 'underscore';
 //const API = 'https://api.themoviedb.org/3/tv/4?api_key=a7846fa6179662a8e7e5da4093c5dbd5&language=en-US'
 //const API = 'https://swapi.co/api'
 
@@ -24,6 +24,12 @@ export interface SeriesTV{
 "poster_path" : string | null
 };
 */
+
+export interface data_chart_lang{
+  name : string
+  value: number
+}
+
 
 export interface result{ 
 	poster_path : string | null
@@ -50,9 +56,11 @@ results : result[];
 
 export class SeriesComponent implements OnInit {
 
-  series$: Observable<TVSeries[]>;
+  series$: Observable<result[]>;
   series_poster_path$: Observable<TVSeries[]>;
   series_name$: Observable<TVSeries[]>;
+  series_lang$: Observable<string[]>;
+  series_chartData$ : Observable<data_chart_lang[]>;
 
 
   private apiKey = 'a7846fa6179662a8e7e5da4093c5dbd5'
@@ -64,16 +72,19 @@ export class SeriesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-  this.series$ = this.http.get<any>(`${this.final_url}$`).pipe(
-    map(response => {
-      return response.results;
-    })
-  );
-  /*this.series_name$ = this.series$.pipe(
-    map(series => {
-      return series.map(
-        series => series.results[-1];
-      )   
-    }) */
+    this.series$ = this.http.get<any>(`${this.final_url}$`).pipe(
+      map(response => {
+        return response.results;
+      })
+    ); 
+    /*this.series_chartData$ = this.series$.pipe(
+      map(series => {
+        return series.map(
+          series => series.original_language
+        )
+      }));/*,
+      map(series => {
+        return flatten(series.map(series => series[-1].split(',')))
+      }));*/
   }
 }

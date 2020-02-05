@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { SeriesTV } from '../cinema/series/series.component'
+import { TVSeries } from '../cinema/series/series.component'
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class SeriesService {
 
   constructor( private http: HttpClient ) { }
 
-  getSeries( serieId: number, language: string ): Observable<SeriesTV> {
-    return this.http.get<SeriesTV>( `https://api.themoviedb.org/3/tv/${serieId}?api_key=${this.apiKey}&language=${language}`);
+  getSeries( serieId: number, language: string ): Observable<TVSeries> {
+    return this.http.get<TVSeries>( `https://api.themoviedb.org/3/tv/${serieId}?api_key=${this.apiKey}&language=${language}`);
   }
 
 
